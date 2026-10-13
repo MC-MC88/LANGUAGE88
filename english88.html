@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b1220">
+<title>English88 — رحلة تعلم الإنجليزية</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root,[data-skin="midnight"]{
+  --bg:#0b1220;--bg2:#0e1830;--panel:#111c34;--panel2:#16223d;
+  --fg:#e8eefb;--dim:#8895b3;--stroke:#1e2b48;
+  --brand:#14b8a6;--brand2:#0d9488;--glow:#2dd4bf;
+  --good:#22c55e;--warn:#f59e0b;--bad:#ef4444;
+  --shadow:0 6px 24px rgba(0,0,0,.35);
+}
+[data-skin="sand"]{
+  --bg:#fbf8f1;--bg2:#f5efe1;--panel:#ffffff;--panel2:#faf5ea;
+  --fg:#1f1a12;--dim:#786a52;--stroke:#e6dcc6;
+  --brand:#b45309;--brand2:#92400e;--glow:#d97706;
+  --good:#15803d;--warn:#d97706;--bad:#b91c1c;
+  --shadow:0 6px 24px rgba(31,26,18,.08);
+}
+[data-skin="rose"]{
+  --bg:#1a0b14;--bg2:#250e1c;--panel:#2c1224;--panel2:#3a1830;
+  --fg:#fce7f3;--dim:#c9a0b8;--stroke:#4a1e3a;
+  --brand:#f43f5e;--brand2:#e11d48;--glow:#fb7185;
+  --good:#22c55e;--warn:#f59e0b;--bad:#ef4444;
+  --shadow:0 6px 24px rgba(0,0,0,.4);
+}
+[data-skin="mint"]{
+  --bg:#06140f;--bg2:#0a1f18;--panel:#0e2a20;--panel2:#15392c;
+  --fg:#d1fae5;--dim:#6ee7b7;--stroke:#1c4a33;
+  --brand:#10b981;--brand2:#059669;--glow:#34d399;
+  --good:#22c55e;--warn:#facc15;--bad:#f87171;
+  --shadow:0 6px 24px rgba(0,0,0,.4);
+}
+[data-skin="indigo"]{
+  --bg:#0a0a1f;--bg2:#10102e;--panel:#161642;--panel2:#1e1e56;
+  --fg:#e0e7ff;--dim:#a5b4fc;--stroke:#2a2a70;
+  --brand:#818cf8;--brand2:#6366f1;--glow:#a5b4fc;
+  --good:#34d399;--warn:#fbbf24;--bad:#f87171;
+  --shadow:0 6px 24px rgba(0,0,0,.45);
+}
+[data-skin="paper"]{
+  --bg:#f4f4f0;--bg2:#ebebe5;--panel:#ffffff;--panel2:#f7f7f2;
+  --fg:#1c1c1a;--dim:#6b6b64;--stroke:#dcdcd2;
+  --brand:#1e40af;--brand2:#1e3a8a;--glow:#3b82f6;
+  --good:#15803d;--warn:#b45309;--bad:#b91c1c;
+  --shadow:0 6px 24px rgba(28,28,26,.08);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'IBM Plex Sans Arabic','Manrope',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--fg);line-height:1.7;min-height:100vh;transition:background .3s,color .3s;-webkit-font-smoothing:antialiased}
+a{color:var(--brand);text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input,textarea{font-family:inherit}
+.en{direction:ltr;unicode-bidi:isolate;display:inline-block;font-family:'Manrope',sans-serif}
+img{max-width:100%}
+
+.splash{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:1.2rem;transition:opacity .6s,visibility .6s}
+.splash.gone{opacity:0;visibility:hidden}
+.splash-brand{font-family:'Manrope',sans-serif;font-size:2.1rem;font-weight:800;letter-spacing:5px;color:var(--brand);animation:splashPulse 1.6s ease-in-out infinite}
+.splash-bar{width:180px;height:3px;background:var(--stroke);border-radius:99px;overflow:hidden;position:relative}
+.splash-bar::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--brand),var(--glow));animation:splashLoad 1.6s ease-in-out infinite}
+.splash-cap{color:var(--dim);font-size:.8rem;letter-spacing:2px}
+@keyframes splashPulse{0%,100%{opacity:1}50%{opacity:.55}}
+@keyframes splashLoad{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+
+.shell{display:grid;grid-template-columns:260px 1fr;min-height:100vh}
+.side{background:var(--panel);border-inline-end:1px solid var(--stroke);padding:1.4rem 1rem;position:sticky;top:0;height:100vh;overflow-y:auto;display:flex;flex-direction:column;gap:1rem;z-index:95}
+.side-brand{display:flex;align-items:center;gap:.6rem;padding:.4rem .6rem 1rem;border-bottom:1px solid var(--stroke);position:relative}
+.side-brand .logo{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,var(--brand),var(--brand2));display:grid;place-items:center;color:#fff;font-family:'Manrope',sans-serif;font-weight:800;font-size:.95rem}
+.side-brand h1{font-family:'Manrope',sans-serif;font-size:1.05rem;font-weight:800;letter-spacing:1.5px;color:var(--brand)}
+.side-brand small{display:block;color:var(--dim);font-size:.68rem;font-weight:500;letter-spacing:.5px;margin-top:.1rem}
+.side-close{display:none;position:absolute;top:.3rem;inset-inline-start:.2rem;width:32px;height:32px;border-radius:8px;background:var(--panel2);border:1px solid var(--stroke);font-size:1rem;color:var(--dim);align-items:center;justify-content:center}
+.side-close:hover{color:var(--bad);border-color:var(--bad)}
+.side-nav{display:flex;flex-direction:column;gap:.25rem}
+.side-nav button{display:flex;align-items:center;gap:.7rem;padding:.65rem .8rem;border-radius:9px;color:var(--dim);font-size:.9rem;font-weight:500;transition:all .15s;text-align:start;width:100%}
+.side-nav button:hover{background:var(--panel2);color:var(--fg)}
+.side-nav button.on{background:linear-gradient(90deg,color-mix(in srgb,var(--brand) 20%,transparent),transparent);color:var(--brand);font-weight:700;border-inline-start:3px solid var(--brand)}
+.side-nav .ico{font-size:1.05rem;width:24px;text-align:center}
+.side-foot{margin-top:auto;padding-top:1rem;border-top:1px solid var(--stroke);display:flex;flex-direction:column;gap:.5rem}
+.skin-btn{display:flex;align-items:center;justify-content:center;gap:.5rem;padding:.55rem;border-radius:9px;background:var(--panel2);border:1px solid var(--stroke);color:var(--dim);font-size:.82rem;transition:all .15s}
+.skin-btn:hover{color:var(--brand);border-color:var(--brand)}
+.progress-mini{padding:.6rem .7rem;background:var(--panel2);border-radius:10px;border:1px solid var(--stroke)}
+.progress-mini .lbl{font-size:.72rem;color:var(--dim);margin-bottom:.35rem;display:flex;justify-content:space-between}
+.progress-mini .bar{height:5px;background:var(--stroke);border-radius:99px;overflow:hidden}
+.progress-mini .bar>i{display:block;height:100%;background:linear-gradient(90deg,var(--brand),var(--glow));transition:width .4s}
+
+.backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(3px);z-index:90}
+.backdrop.show{display:block}
+
+.main{padding:1.6rem 1.8rem 3rem;max-width:1100px;width:100%;margin:0 auto}
+.topbar{display:flex;align-items:center;gap:.7rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.topbar .grow{flex:1}
+.topbar h2{font-family:'Manrope',sans-serif;font-size:1.5rem;font-weight:800;letter-spacing:-.5px}
+.topbar .sub{color:var(--dim);font-size:.85rem;margin-top:.15rem}
+.icon-btn{width:40px;height:40px;border-radius:10px;background:var(--panel);border:1px solid var(--stroke);display:grid;place-items:center;font-size:1rem;transition:all .15s}
+.icon-btn:hover{border-color:var(--brand);color:var(--brand);transform:translateY(-1px)}
+
+.view{animation:viewIn .3s ease}
+@keyframes viewIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+.banner{background:linear-gradient(120deg,var(--panel) 0%,var(--panel2) 100%);border:1px solid var(--stroke);border-radius:14px;padding:1.5rem 1.7rem;margin-bottom:1.4rem;position:relative;overflow:hidden}
+.banner::before{content:"";position:absolute;top:-40%;inset-inline-end:-15%;width:300px;height:300px;background:radial-gradient(circle,var(--brand) 0%,transparent 70%);opacity:.15;pointer-events:none}
+.banner .tag{display:inline-flex;align-items:center;gap:.4rem;background:color-mix(in srgb,var(--brand) 15%,transparent);color:var(--brand);padding:.3rem .75rem;border-radius:99px;font-size:.75rem;font-weight:700;margin-bottom:.7rem;position:relative;z-index:1}
+.banner h3{font-family:'Manrope',sans-serif;font-size:1.55rem;font-weight:800;letter-spacing:-.5px;margin-bottom:.3rem;position:relative;z-index:1}
+.banner p{color:var(--dim);font-size:.92rem;margin-bottom:1rem;position:relative;z-index:1;max-width:560px}
+.banner .row{display:flex;gap:.5rem;flex-wrap:wrap;position:relative;z-index:1}
+
+.btn{padding:.6rem 1.15rem;border-radius:10px;font-size:.88rem;font-weight:600;transition:all .15s;border:1px solid var(--stroke);background:var(--panel);color:var(--fg);display:inline-flex;align-items:center;gap:.4rem;justify-content:center}
+.btn:hover{border-color:var(--brand);transform:translateY(-1px)}
+.btn.solid{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;border-color:transparent;font-weight:700}
+.btn.solid:hover{box-shadow:0 8px 22px color-mix(in srgb,var(--brand) 35%,transparent)}
+.btn.done{background:color-mix(in srgb,var(--good) 15%,transparent);color:var(--good);border-color:var(--good)}
+.btn.sm{padding:.4rem .8rem;font-size:.8rem}
+
+.stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.7rem;margin-bottom:1.4rem}
+.stat{background:var(--panel);border:1px solid var(--stroke);border-radius:12px;padding:1rem;display:flex;align-items:center;gap:.8rem;transition:border-color .15s}
+.stat:hover{border-color:var(--brand)}
+.stat .ring{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-family:'Manrope',sans-serif;font-weight:800;font-size:.75rem;color:var(--brand);background:conic-gradient(var(--brand) var(--p,0%),var(--stroke) 0);position:relative;flex-shrink:0}
+.stat .ring::before{content:"";position:absolute;inset:5px;border-radius:50%;background:var(--panel)}
+.stat .ring>span{position:relative;z-index:1}
+.stat .num{font-family:'Manrope',sans-serif;font-size:1.35rem;font-weight:800;line-height:1.1}
+.stat .lbl{color:var(--dim);font-size:.75rem;margin-top:.15rem}
+
+.panel{background:var(--panel);border:1px solid var(--stroke);border-radius:14px;padding:1.3rem 1.4rem;margin-bottom:1rem}
+.panel-title{font-family:'Manrope',sans-serif;font-size:1.05rem;font-weight:700;margin-bottom:.8rem;display:flex;align-items:center;gap:.5rem}
+.panel-title::before{content:"";width:4px;height:16px;border-radius:2px;background:var(--brand)}
+
+.unit-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:.8rem}
+.unit{background:var(--panel);border:1px solid var(--stroke);border-radius:12px;padding:1.05rem 1.15rem;cursor:pointer;transition:all .15s;position:relative}
+.unit:hover{border-color:var(--brand);transform:translateY(-2px)}
+.unit .top{display:flex;justify-content:space-between;align-items:center;gap:.5rem;margin-bottom:.55rem}
+.unit .order{font-family:'Manrope',sans-serif;font-size:.7rem;font-weight:800;letter-spacing:1px;color:var(--brand);padding:.15rem .55rem;background:color-mix(in srgb,var(--brand) 15%,transparent);border-radius:6px}
+.unit .lvl{font-family:'Manrope',sans-serif;font-size:.68rem;font-weight:700;padding:.15rem .5rem;border-radius:6px}
+.unit .lvl.A1{background:rgba(16,185,129,.15);color:#10b981}
+.unit .lvl.A2{background:rgba(56,189,248,.15);color:#38bdf8}
+.unit .lvl.B1{background:rgba(167,139,250,.15);color:#a78bfa}
+.unit h4{font-size:.98rem;font-weight:700;margin-bottom:.2rem}
+.unit .en-title{font-family:'Manrope',sans-serif;direction:ltr;text-align:right;color:var(--dim);font-size:.8rem;margin-bottom:.5rem}
+.unit .info{display:flex;justify-content:space-between;font-size:.76rem;color:var(--dim);margin-bottom:.5rem}
+.unit .track{height:4px;background:var(--stroke);border-radius:99px;overflow:hidden}
+.unit .track>i{display:block;height:100%;background:linear-gradient(90deg,var(--brand),var(--glow));transition:width .4s}
+
+.chips{display:flex;gap:.35rem;flex-wrap:wrap;margin-bottom:1rem}
+.chip{padding:.35rem .85rem;border-radius:99px;background:var(--panel);border:1px solid var(--stroke);font-size:.8rem;color:var(--dim);font-weight:500;transition:all .15s}
+.chip:hover{border-color:var(--brand);color:var(--fg)}
+.chip.on{background:var(--brand);color:#fff;border-color:var(--brand);font-weight:700}
+
+.lesson-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:.7rem}
+.lcard{background:var(--panel);border:1px solid var(--stroke);border-radius:11px;padding:1rem 1.05rem;cursor:pointer;transition:all .15s;border-inline-start:3px solid transparent;position:relative}
+.lcard:hover{border-color:var(--brand);border-inline-start-color:var(--brand);transform:translateY(-1px)}
+.lcard.done{border-inline-start-color:var(--good);opacity:.85}
+.lcard.done::after{content:"✓";position:absolute;top:.65rem;inset-inline-end:.7rem;color:var(--good);font-weight:800;font-size:.95rem}
+.lcard .meta{display:flex;gap:.35rem;flex-wrap:wrap;margin-bottom:.5rem}
+.lcard .kind{font-size:.66rem;font-weight:700;letter-spacing:.4px;padding:.14rem .5rem;border-radius:5px;background:var(--panel2);color:var(--dim);border:1px solid var(--stroke)}
+.lcard .kind.g{color:#60a5fa;border-color:#1e40af40}
+.lcard .kind.c{color:#c084fc;border-color:#7c3aed40}
+.lcard .kind.v{color:#34d399;border-color:#04785740}
+.lcard .kind.n{color:#fbbf24;border-color:#b4530940}
+.lcard .t-en{font-family:'Manrope',sans-serif;direction:ltr;text-align:right;font-weight:700;color:var(--glow);font-size:.95rem;margin-bottom:.15rem;line-height:1.3}
+.lcard .t-ar{font-size:.85rem;color:var(--fg);font-weight:500}
+
+.lesson-hd{padding-bottom:1rem;border-bottom:1px solid var(--stroke);margin-bottom:1.2rem}
+.lesson-hd .meta{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.7rem}
+.lesson-hd h2{font-family:'Manrope',sans-serif;direction:ltr;text-align:right;font-size:1.45rem;font-weight:800;color:var(--glow);line-height:1.25;letter-spacing:-.3px}
+.lesson-hd .ar{font-size:1rem;color:var(--fg);margin-top:.3rem;font-weight:600}
+
+.callout{background:var(--panel2);border-inline-start:3px solid var(--brand);padding:.9rem 1.05rem;border-radius:9px;margin:1rem 0;font-size:.93rem;line-height:1.85}
+
+.verb-block{margin:1.2rem 0}
+.verb-block h5{font-family:'Manrope',sans-serif;direction:ltr;text-align:right;color:var(--brand);font-size:.95rem;font-weight:700;margin-bottom:.4rem;letter-spacing:.3px}
+table.conj{width:100%;border-collapse:collapse;background:var(--panel2);border-radius:10px;overflow:hidden;font-size:.9rem}
+table.conj th{background:var(--panel);padding:.5rem .8rem;text-align:right;font-size:.76rem;color:var(--brand);font-weight:700;border-bottom:1px solid var(--stroke);letter-spacing:.3px}
+table.conj td{padding:.5rem .8rem;border-bottom:1px solid var(--stroke)}
+table.conj tr:last-child td{border-bottom:none}
+table.conj td.en{color:var(--glow);font-weight:700;direction:ltr;text-align:left;cursor:pointer;font-family:'Manrope',sans-serif}
+table.conj td.en:hover{color:var(--brand)}
+
+.ex-list{display:flex;flex-direction:column;gap:.1rem;margin:.5rem 0}
+.ex{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;padding:.55rem .75rem;border-radius:8px;cursor:pointer;transition:background .15s;flex-wrap:wrap}
+.ex:hover{background:var(--panel2)}
+.ex .en{color:var(--glow);font-weight:600;font-family:'Manrope',sans-serif;font-size:.93rem;direction:ltr;text-align:left}
+.ex .ar{color:var(--dim);font-size:.88rem}
+.ex .spk{font-size:.72rem;opacity:.4;margin-inline-start:.3rem}
+.ex:hover .spk{opacity:.9}
+
+.voc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.5rem;margin-top:.6rem}
+.voc{background:var(--panel2);border:1px solid var(--stroke);border-radius:9px;padding:.55rem .75rem;cursor:pointer;transition:all .15s}
+.voc:hover{border-color:var(--brand);transform:translateY(-1px)}
+.voc .en{font-family:'Manrope',sans-serif;color:var(--glow);font-weight:700;font-size:.88rem;display:block;direction:ltr;text-align:left}
+.voc .ar{color:var(--dim);font-size:.8rem;margin-top:.1rem}
+
+.actions{display:flex;gap:.5rem;margin:1.4rem 0 .8rem;flex-wrap:wrap}
+.nav-pp{display:flex;justify-content:space-between;gap:.5rem;margin-top:1rem}
+.nav-pp .btn{flex:1}
+
+.search-wrap{width:100%;padding:.85rem 1.1rem;border-radius:11px;background:var(--panel);border:1px solid var(--stroke);color:var(--fg);font-size:.95rem;margin-bottom:1rem;outline:none;transition:border .15s}
+.search-wrap:focus{border-color:var(--brand)}
+
+.fc-setup{display:grid;gap:.7rem;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));margin-bottom:1.4rem}
+.fc-pick{background:var(--panel);border:1px solid var(--stroke);border-radius:12px;padding:1rem;text-align:center;cursor:pointer;transition:all .15s}
+.fc-pick:hover{border-color:var(--brand);transform:translateY(-2px)}
+.fc-pick h4{font-size:.95rem;font-weight:700;margin-bottom:.2rem}
+.fc-pick p{color:var(--dim);font-size:.78rem}
+
+.flash{background:linear-gradient(135deg,var(--panel),var(--panel2));border:1px solid var(--stroke);border-radius:20px;padding:3rem 2rem;text-align:center;min-height:300px;display:flex;flex-direction:column;justify-content:center;align-items:center;cursor:pointer;transition:all .3s;user-select:none;position:relative}
+.flash:hover{border-color:var(--brand)}
+.flash.flip{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff}
+.flash .word{font-family:'Manrope',sans-serif;font-size:2rem;font-weight:800;direction:ltr;margin-bottom:.6rem;word-break:break-word}
+.flash .hint{color:var(--dim);font-size:.8rem;margin-top:.9rem}
+.flash.flip .hint{color:rgba(255,255,255,.7)}
+.fc-ctrl{display:flex;gap:.6rem;justify-content:center;margin-top:1.1rem;flex-wrap:wrap}
+.fc-idx{text-align:center;color:var(--dim);font-size:.82rem;margin-top:.5rem}
+
+.empty{text-align:center;padding:2.5rem 1rem;color:var(--dim)}
+.empty .em{font-size:2.8rem;margin-bottom:.5rem}
+
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(6px);z-index:100;display:none;padding:1.2rem}
+.overlay.open{display:block}
+.search-box{max-width:600px;margin:2.5rem auto 0;background:var(--panel);border:1px solid var(--stroke);border-radius:14px;overflow:hidden;box-shadow:var(--shadow)}
+.search-box input{width:100%;padding:1rem 1.2rem;background:transparent;border:none;outline:none;color:var(--fg);font-size:1.05rem;border-bottom:1px solid var(--stroke)}
+.search-res{max-height:60vh;overflow-y:auto;padding:.5rem}
+.sr{padding:.65rem .9rem;border-radius:9px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:.8rem;transition:background .15s}
+.sr:hover{background:var(--panel2)}
+.sr .en{color:var(--glow);font-weight:600;font-size:.9rem}
+.sr .ar{color:var(--dim);font-size:.85rem}
+.sr-empty{text-align:center;padding:2rem;color:var(--dim)}
+
+.toast{position:fixed;bottom:1.5rem;inset-inline-start:50%;transform:translateX(50%) translateY(100px);background:var(--panel);border:1px solid var(--brand);color:var(--fg);padding:.7rem 1.2rem;border-radius:10px;box-shadow:var(--shadow);opacity:0;transition:all .3s;z-index:200;font-size:.86rem}
+.toast.show{opacity:1;transform:translateX(50%) translateY(0)}
+
+footer.site{border-top:1px solid var(--stroke);padding:1.4rem 1.2rem;text-align:center;color:var(--dim);font-size:.8rem;margin-top:2rem}
+footer.site a{color:var(--brand)}
+footer.site .rst{display:inline-block;margin-top:.5rem;color:var(--dim);font-size:.74rem;padding:.3rem .7rem;border:1px solid var(--stroke);border-radius:6px;transition:all .15s}
+footer.site .rst:hover{border-color:var(--brand);color:var(--brand)}
+
+.mobile-nav{display:none}
+
+@media(max-width:900px){
+  .shell{grid-template-columns:1fr}
+  .side{position:fixed;top:0;inset-inline-start:-100%;width:280px;height:100vh;transition:inset-inline-start .3s;box-shadow:var(--shadow)}
+  .side.open{inset-inline-start:0}
+  .side-close{display:flex}
+  .side-brand{padding-top:1rem}
+  .main{padding:1.2rem 1rem 6rem}
+  .topbar h2{font-size:1.25rem}
+  .banner{padding:1.2rem}
+  .banner h3{font-size:1.3rem}
+  .lesson-hd h2{font-size:1.2rem}
+  .flash{padding:2rem 1.2rem;min-height:250px}
+  .flash .word{font-size:1.5rem}
+  .mobile-nav{display:flex;position:fixed;bottom:0;inset-inline:0;background:var(--panel);border-top:1px solid var(--stroke);padding:.5rem;justify-content:space-around;z-index:80;box-shadow:0 -4px 20px rgba(0,0,0,.15)}
+  .mobile-nav button{flex:1;display:flex;flex-direction:column;align-items:center;gap:.15rem;padding:.4rem;border-radius:8px;color:var(--dim);font-size:.68rem;font-weight:600}
+  .mobile-nav button.on{color:var(--brand)}
+  .mobile-nav .ico{font-size:1.15rem}
+  .side-foot .progress-mini{display:block}
+}
+@media(min-width:901px){.menu-btn{display:none}}
+</style>
+</head>
+<body>
+
+<div class="splash" id="splash">
+  <div class="splash-brand">English88</div>
+  <div class="splash-bar"></div>
+  <div class="splash-cap">LOADING</div>
+</div>
+
+<div class="backdrop" id="backdrop"></div>
+
+<div class="shell">
+  <aside class="side" id="side">
+    <div class="side-brand">
+      <button class="side-close" id="sideClose" title="إغلاق">✕</button>
+      <div class="logo">E88</div>
+      <div>
+        <h1>English88</h1>
+        <small>رحلة تعلم الإنجليزية</small>
+      </div>
+    </div>
+    <nav class="side-nav">
+      <button data-view="dashboard" class="on"><span class="ico">🏠</span><span>الرئيسية</span></button>
+      <button data-view="lessons"><span class="ico">📚</span><span>الدروس</span></button>
+      <button data-view="vocab"><span class="ico">🔤</span><span>المفردات</span></button>
+      <button data-view="flashcards"><span class="ico">🎴</span><span>بطاقات المراجعة</span></button>
+    </nav>
+    <div class="side-foot">
+      <div class="progress-mini">
+        <div class="lbl"><span>التقدم</span><span id="sidePct">0%</span></div>
+        <div class="bar"><i id="sideBar" style="width:0%"></i></div>
+      </div>
+      <button class="skin-btn" id="skinBtn">🎨 تغيير المظهر</button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <button class="icon-btn menu-btn" id="menuBtn">☰</button>
+      <div class="grow">
+        <h2 id="pageTitle">الرئيسية</h2>
+        <div class="sub" id="pageSub">ابدأ رحلتك في اللغة الإنجليزية</div>
+      </div>
+      <button class="icon-btn" id="searchOpen" title="بحث">🔍</button>
+    </div>
+    <div id="viewRoot"></div>
+    <footer class="site">
+      © <span id="year"></span> English88 — <a href="mailto:mohamed005cheikh@gmail.com">mohamed005cheikh@gmail.com</a> | by MC88
+      <br>
+      <a href="https://wa.me/22230726475" target="_blank" rel="noopener" style="display:inline-block;margin-top:.4rem">📱 +222 30 72 64 75</a>
+      <br>
+      <button class="rst" id="resetBtn">إعادة تعيين التقدم</button>
+    </footer>
+  </main>
+</div>
+
+<nav class="mobile-nav">
+  <button data-view="dashboard" class="on"><span class="ico">🏠</span><span>الرئيسية</span></button>
+  <button data-view="lessons"><span class="ico">📚</span><span>الدروس</span></button>
+  <button data-view="vocab"><span class="ico">🔤</span><span>المفردات</span></button>
+  <button data-view="flashcards"><span class="ico">🎴</span><span>بطاقات</span></button>
+</nav>
+
+<div class="overlay" id="overlay">
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="ابحث عن درس أو كلمة..." autocomplete="off">
+    <div class="search-res" id="searchRes"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const CURRICULUM = {
+  meta:{brand:"English88",levels:["A1","A2","B1"]},
+  units:[
+    {id:"u01",order:1,level:"A1",title_ar:"الحروف والأصوات",title_en:"Alphabet & Sounds",lessons:[
+      {id:"l01-1",kind:"note",title_en:"The English Alphabet",title_ar:"الحروف الإنجليزية",rule_ar:"اللغة الإنجليزية تحتوي على 26 حرفًا. تنقسم إلى 5 حروف علة (A, E, I, O, U) و21 حرفًا ساكنًا. كل حرف له اسم (نستخدمه في التهجئة) وصوت (نستخدمه في القراءة).",examples:[
+        {en:"A — Apple",ar:"إي — تفاحة"},
+        {en:"B — Boy",ar:"بي — ولد"},
+        {en:"C — Cat",ar:"سي — قطة"},
+        {en:"D — Dog",ar:"دي — كلب"},
+        {en:"E — Egg",ar:"إي — بيضة"},
+        {en:"F — Fish",ar:"إف — سمكة"},
+        {en:"G — Girl",ar:"جي — بنت"},
+        {en:"H — House",ar:"إتش — منزل"},
+        {en:"I — Igloo",ar:"آي — بيت جليد"},
+        {en:"J — Juice",ar:"جي — عصير"},
+        {en:"K — Kite",ar:"كي — طائرة ورقية"},
+        {en:"L — Lion",ar:"إل — أسد"},
+        {en:"M — Moon",ar:"إم — قمر"},
+        {en:"N — Nose",ar:"إن — أنف"},
+        {en:"O — Orange",ar:"أو — برتقالة"},
+        {en:"P — Pen",ar:"بي — قلم"},
+        {en:"Q — Queen",ar:"كيو — ملكة"},
+        {en:"R — Rabbit",ar:"أر — أرنب"},
+        {en:"S — Sun",ar:"إس — شمس"},
+        {en:"T — Table",ar:"تي — طاولة"},
+        {en:"U — Umbrella",ar:"يو — مظلة"},
+        {en:"V — Van",ar:"في — شاحنة صغيرة"},
+        {en:"W — Water",ar:"دبليو — ماء"},
+        {en:"X — Box",ar:"إكس — صندوق"},
+        {en:"Y — Yes",ar:"واي — نعم"},
+        {en:"Z — Zoo",ar:"زد — حديقة حيوانات"}
+      ]},
+      {id:"l01-2",kind:"note",title_en:"Similar Sounds",title_ar:"حروف متشابهة في النطق",rule_ar:"بعض الحروف قد تختلط عند النطق: P و B (P انفخ هواء بدون اهتزاز، B مع اهتزاز الحنجرة)، F و V (F هواء فقط، V مع اهتزاز)، C/K/Q كلها قريبة من صوت الكاف لكن فرقها في الاسم. حرف R راء خفيفة واحدة، وحرف W واو خفيفة جدًا مع تدوير الشفتين.",examples:[
+        {en:"P — Pen (no vibration)",ar:"پ — انفخ هواء فقط"},
+        {en:"B — Boy (with vibration)",ar:"ب — مع اهتزاز الحنجرة"},
+        {en:"F — Fish (air only)",ar:"ف — هواء فقط"},
+        {en:"V — Van (with vibration)",ar:"ڤ — مع اهتزاز"},
+        {en:"R — light single tap",ar:"ر — راء خفيفة واحدة"},
+        {en:"W — soft wa",ar:"و — واو خفيفة جدًا"}
+      ]}
+    ]},
+    {id:"u02",order:2,level:"A1",title_ar:"الضمائر الشخصية",title_en:"Personal Pronouns",lessons:[
+      {id:"l02-1",kind:"grammar",title_en:"Subject Pronouns",title_ar:"ضمائر الفاعل",rule_ar:"ضمائر الفاعل تحل محل الاسم لتجنب التكرار. تأتي في بداية الجملة ودائمًا تُكتب بحرف كبير.",examples:[
+        {en:"I am happy.",ar:"أنا سعيد."},
+        {en:"You are nice.",ar:"أنت لطيف."},
+        {en:"He is a doctor.",ar:"هو طبيب."},
+        {en:"She is a teacher.",ar:"هي معلمة."},
+        {en:"It is a cat.",ar:"إنها قطة."},
+        {en:"We are friends.",ar:"نحن أصدقاء."},
+        {en:"They are happy.",ar:"هم سعداء."}
+      ]},
+      {id:"l02-2",kind:"vocabulary",title_en:"Basic Vocabulary",title_ar:"مفردات أساسية",items:[
+        {en:"man",ar:"رجل"},{en:"woman",ar:"امرأة"},{en:"boy",ar:"ولد"},{en:"girl",ar:"بنت"},{en:"child",ar:"طفل"},{en:"baby",ar:"رضيع"},{en:"cat",ar:"قطة"},{en:"dog",ar:"كلب"},{en:"book",ar:"كتاب"},{en:"pen",ar:"قلم"},{en:"school",ar:"مدرسة"},{en:"house",ar:"منزل"},{en:"car",ar:"سيارة"},{en:"teacher",ar:"معلم"},{en:"student",ar:"طالب"}
+      ]}
+    ]},
+    {id:"u03",order:3,level:"A1",title_ar:"فعل يكون والنفي",title_en:"To Be & Negation",lessons:[
+      {id:"l03-1",kind:"grammar",title_en:"Verb To Be — am / is / are",title_ar:"فعل يكون في المضارع",rule_ar:"في الإنجليزية يجب ذكر فعل 'يكون' في الجملة الاسمية. الصور الثلاث: am مع I، is مع He/She/It، are مع You/We/They.",conjugation:{
+        "to_be":{yo:"I am",tú:"You are",él_ella_usted:"He / She / It is",nosotros:"We are",vosotros:"You are",ellos_ellas_ustedes:"They are"}
+      },examples:[
+        {en:"I am a student.",ar:"أنا طالب."},
+        {en:"He is tall.",ar:"هو طويل."},
+        {en:"She is a teacher.",ar:"هي معلمة."},
+        {en:"It is a big house.",ar:"إنه منزل كبير."},
+        {en:"We are friends.",ar:"نحن أصدقاء."},
+        {en:"They are tired.",ar:"هم متعبون."}
+      ]},
+      {id:"l03-2",kind:"grammar",title_en:"Negation of To Be",title_ar:"نفي فعل يكون",rule_ar:"نضيف not بعد am/is/are. الاختصارات: isn't = is not، aren't = are not. مع I نستخدم I'm not.",examples:[
+        {en:"I am not happy.",ar:"أنا لست سعيدًا."},
+        {en:"He isn't short.",ar:"هو ليس قصيرًا."},
+        {en:"She isn't a doctor.",ar:"هي ليست طبيبة."},
+        {en:"It isn't cold.",ar:"إنه ليس باردًا."},
+        {en:"We aren't wrong.",ar:"نحن لسنا مخطئين."},
+        {en:"They aren't cheap.",ar:"إنها ليست رخيصة."}
+      ]},
+      {id:"l03-3",kind:"vocabulary",title_en:"Adjectives & Opposites",title_ar:"صفات وأضداد",items:[
+        {en:"happy",ar:"سعيد"},{en:"sad",ar:"حزين"},{en:"tall",ar:"طويل"},{en:"short",ar:"قصير"},{en:"big",ar:"كبير"},{en:"small",ar:"صغير"},{en:"new",ar:"جديد"},{en:"old",ar:"قديم"},{en:"good",ar:"جيد"},{en:"bad",ar:"سيء"},{en:"hungry",ar:"جائع"},{en:"thirsty",ar:"عطشان"},{en:"tired",ar:"متعب"},{en:"clean",ar:"نظيف"},{en:"dirty",ar:"قذر"},{en:"hot",ar:"حار"},{en:"cold",ar:"بارد"},{en:"easy",ar:"سهل"},{en:"difficult",ar:"صعب"},{en:"fast",ar:"سريع"},{en:"slow",ar:"بطيء"},{en:"expensive",ar:"غالي"},{en:"cheap",ar:"رخيص"},{en:"wrong",ar:"خطأ"},{en:"right",ar:"صحيح"},{en:"sick",ar:"مريض"}
+      ]}
+    ]},
+    {id:"u04",order:4,level:"A1",title_ar:"أدوات النكرة والأرقام",title_en:"Articles & Numbers",lessons:[
+      {id:"l04-1",kind:"grammar",title_en:"a / an",title_ar:"أدوات النكرة",rule_ar:"نستخدم a قبل الأسماء المفردة التي تبدأ بصوت ساكن، و an قبل التي تبدأ بصوت علة. القاعدة تعتمد على الصوت وليس الحرف المكتوب.",examples:[
+        {en:"a book",ar:"كتاب"},
+        {en:"a cat",ar:"قطة"},
+        {en:"an apple",ar:"تفاحة"},
+        {en:"an egg",ar:"بيضة"},
+        {en:"an hour",ar:"ساعة (H صامتة)"},
+        {en:"a university",ar:"جامعة (تبدأ بصوت ي)"},
+        {en:"a hospital",ar:"مستشفى"}
+      ]},
+      {id:"l04-2",kind:"vocabulary",title_en:"Numbers 1–20",title_ar:"الأرقام من 1 إلى 20",items:[
+        {en:"one",ar:"واحد"},{en:"two",ar:"اثنان"},{en:"three",ar:"ثلاثة"},{en:"four",ar:"أربعة"},{en:"five",ar:"خمسة"},{en:"six",ar:"ستة"},{en:"seven",ar:"سبعة"},{en:"eight",ar:"ثمانية"},{en:"nine",ar:"تسعة"},{en:"ten",ar:"عشرة"},{en:"eleven",ar:"أحد عشر"},{en:"twelve",ar:"اثنا عشر"},{en:"thirteen",ar:"ثلاثة عشر"},{en:"fourteen",ar:"أربعة عشر"},{en:"fifteen",ar:"خمسة عشر"},{en:"sixteen",ar:"ستة عشر"},{en:"seventeen",ar:"سبعة عشر"},{en:"eighteen",ar:"ثمانية عشر"},{en:"nineteen",ar:"تسعة عشر"},{en:"twenty",ar:"عشرون"}
+      ]},
+      {id:"l04-3",kind:"grammar",title_en:"Prepositions of Place",title_ar:"حروف الجر المكانية",rule_ar:"in (في/داخل)، on (على)، under (تحت).",examples:[
+        {en:"The cat is in the box.",ar:"القطة في الصندوق."},
+        {en:"The pen is on the desk.",ar:"القلم على المكتب."},
+        {en:"The shoes are under the bed.",ar:"الأحذية تحت السرير."},
+        {en:"The picture is on the wall.",ar:"الصورة على الحائط."}
+      ]}
+    ]},
+    {id:"u05",order:5,level:"A1",title_ar:"أسئلة ما ومن",title_en:"What & Who Questions",lessons:[
+      {id:"l05-1",kind:"grammar",title_en:"What is this? / Who is that?",title_ar:"أسئلة ما هذا؟ ومن ذلك؟",rule_ar:"نستخدم What للسؤال عن الأشياء، و Who للسؤال عن الأشخاص. الإجابة الكاملة أفضل للتعلم.",examples:[
+        {en:"What is this? — It is a book.",ar:"ما هذا؟ — إنه كتاب."},
+        {en:"What are these? — They are pencils.",ar:"ما هؤلاء؟ — هم أقلام."},
+        {en:"Who is that? — He is my father.",ar:"من ذلك؟ — هو أبي."},
+        {en:"Who are they? — They are my friends.",ar:"من هم؟ — هم أصدقائي."},
+        {en:"What is your name? — My name is Sara.",ar:"ما اسمك؟ — اسمي سارة."}
+      ]}
+    ]},
+    {id:"u06",order:6,level:"A2",title_ar:"المضارع البسيط",title_en:"Present Simple",lessons:[
+      {id:"l06-1",kind:"grammar",title_en:"Present Simple — I / You",title_ar:"المضارع البسيط مع I و You",rule_ar:"مع I و You و We و They يبقى الفعل في المصدر بدون أي إضافات. التركيبة: Subject + Verb + Object.",examples:[
+        {en:"I eat bread.",ar:"أنا آكل خبزًا."},
+        {en:"I drink water.",ar:"أنا أشرب ماء."},
+        {en:"You go to school.",ar:"أنت تذهب إلى المدرسة."},
+        {en:"I like apples.",ar:"أنا أحب التفاح."},
+        {en:"I have a book.",ar:"لدي كتاب."},
+        {en:"You sleep early.",ar:"أنت تنام مبكرًا."}
+      ]},
+      {id:"l06-2",kind:"vocabulary",title_en:"Top 10 Daily Verbs",title_ar:"أشهر 10 أفعال يومية",items:[
+        {en:"eat",ar:"يأكل"},{en:"drink",ar:"يشرب"},{en:"go",ar:"يذهب"},{en:"come",ar:"يأتي"},{en:"see",ar:"يرى"},{en:"like",ar:"يحب"},{en:"want",ar:"يريد"},{en:"have",ar:"يملك"},{en:"read",ar:"يقرأ"},{en:"sleep",ar:"ينام"}
+      ]},
+      {id:"l06-3",kind:"grammar",title_en:"Adding -s with He / She / It",title_ar:"قاعدة إضافة s مع He/She/It",rule_ar:"مع He/She/It نضيف s للفعل. إذا انتهى الفعل بـ (s, sh, ch, x, o, z) نضيف es. إذا انتهى بحرف ساكن + y نقلب y إلى ies. have تصبح has.",conjugation:{
+        "play":{yo:"I play",tú:"You play",él_ella_usted:"He / She / It plays",nosotros:"We play",vosotros:"You play",ellos_ellas_ustedes:"They play"},
+        "study":{yo:"I study",tú:"You study",él_ella_usted:"He / She / It studies",nosotros:"We study",vosotros:"You study",ellos_ellas_ustedes:"They study"},
+        "go":{yo:"I go",tú:"You go",él_ella_usted:"He / She / It goes",nosotros:"We go",vosotros:"You go",ellos_ellas_ustedes:"They go"},
+        "watch":{yo:"I watch",tú:"You watch",él_ella_usted:"He / She / It watches",nosotros:"We watch",vosotros:"You watch",ellos_ellas_ustedes:"They watch"},
+        "have":{yo:"I have",tú:"You have",él_ella_usted:"He / She / It has",nosotros:"We have",vosotros:"You have",ellos_ellas_ustedes:"They have"}
+      }},
+      {id:"l06-4",kind:"vocabulary",title_en:"More Daily Verbs",title_ar:"أفعال يومية إضافية",items:[
+        {en:"work",ar:"يعمل"},{en:"live",ar:"يسكن"},{en:"speak",ar:"يتحدث"},{en:"wash",ar:"يغسل"},{en:"teach",ar:"يعلم"},{en:"drive",ar:"يقود"},{en:"cook",ar:"يطبخ"},{en:"walk",ar:"يمشي"},{en:"run",ar:"يركض"},{en:"write",ar:"يكتب"},{en:"listen",ar:"يستمع"},{en:"open",ar:"يفتح"},{en:"close",ar:"يغلق"}
+      ]}
+    ]},
+    {id:"u07",order:7,level:"A2",title_ar:"نفي المضارع البسيط",title_en:"Present Simple Negation",lessons:[
+      {id:"l07-1",kind:"grammar",title_en:"don't / doesn't",title_ar:"النفي بـ don't و doesn't",rule_ar:"مع I/You/We/They نستخدم don't + الفعل. مع He/She/It نستخدم doesn't + الفعل. الفعل يرجع للمصدر بدون s بعد doesn't.",examples:[
+        {en:"I don't like coffee.",ar:"أنا لا أحب القهوة."},
+        {en:"You don't know him.",ar:"أنت لا تعرفه."},
+        {en:"He doesn't eat meat.",ar:"هو لا يأكل اللحم."},
+        {en:"She doesn't watch TV.",ar:"هي لا تشاهد التلفاز."},
+        {en:"We don't have money.",ar:"نحن لا نملك مالًا."},
+        {en:"They don't understand French.",ar:"هم لا يفهمون الفرنسية."}
+      ]},
+      {id:"l07-2",kind:"vocabulary",title_en:"Verbs of Mind",title_ar:"أفعال ذهنية",items:[
+        {en:"know",ar:"يعرف"},{en:"understand",ar:"يفهم"},{en:"remember",ar:"يتذكر"},{en:"forget",ar:"ينسى"},{en:"need",ar:"يحتاج"},{en:"love",ar:"يحب"},{en:"hate",ar:"يكره"},{en:"use",ar:"يستخدم"},{en:"buy",ar:"يشتري"},{en:"sell",ar:"يبيع"}
+      ]}
+    ]},
+    {id:"u08",order:8,level:"A2",title_ar:"ظروف التكرار",title_en:"Adverbs of Frequency",lessons:[
+      {id:"l08-1",kind:"grammar",title_en:"Always, Usually, Sometimes, Never",title_ar:"دائمًا، عادة، أحيانًا، أبدًا",rule_ar:"ظروف التكرار تأتي قبل الفعل العادي، وبعد فعل 'يكون' (am/is/are). Sometimes يمكن أن تأتي في بداية الجملة. لا نستخدم not مع never.",examples:[
+        {en:"I always eat breakfast.",ar:"أنا دائمًا آكل الفطور."},
+        {en:"She usually goes to bed at 10.",ar:"هي عادة تذهب للنوم الساعة 10."},
+        {en:"We sometimes play football.",ar:"نحن أحيانًا نلعب كرة القدم."},
+        {en:"He never drinks coffee.",ar:"هو لا يشرب القهوة أبدًا."},
+        {en:"I am always happy.",ar:"أنا دائمًا سعيد."},
+        {en:"She is never late.",ar:"هي لا تتأخر أبدًا."}
+      ]},
+      {id:"l08-2",kind:"vocabulary",title_en:"Times of Day",title_ar:"أوقات اليوم",items:[
+        {en:"morning",ar:"صباح"},{en:"afternoon",ar:"بعد الظهر"},{en:"evening",ar:"مساء"},{en:"night",ar:"ليل"}
+      ]}
+    ]},
+    {id:"u09",order:9,level:"A2",title_ar:"أسئلة المضارع البسيط",title_en:"Present Simple Questions",lessons:[
+      {id:"l09-1",kind:"grammar",title_en:"Do / Does Questions",title_ar:"أسئلة Do و Does",rule_ar:"مع I/You/We/They نبدأ بـ Do. مع He/She/It نبدأ بـ Does. بعد Do/Does يرجع الفعل للمصدر بدون s.",examples:[
+        {en:"Do you like pizza? — Yes, I do.",ar:"هل تحب البيتزا؟ — نعم."},
+        {en:"Does she speak English? — No, she doesn't.",ar:"هل تتحدث الإنجليزية؟ — لا."},
+        {en:"Do they live here? — Yes, they do.",ar:"هل يسكنون هنا؟ — نعم."},
+        {en:"Does he have a car? — No, he doesn't.",ar:"هل لديه سيارة؟ — لا."}
+      ]},
+      {id:"l09-2",kind:"grammar",title_en:"Wh- Questions",title_ar:"أدوات الاستفهام",rule_ar:"التركيبة: Wh-word + do/does + Subject + Verb (base). أدوات الاستفهام: What, Who, Where, When, Why, How, Which.",examples:[
+        {en:"Where do you live? — I live in Cairo.",ar:"أين تسكن؟ — أسكن في القاهرة."},
+        {en:"When does she go to school? — She goes at 8.",ar:"متى تذهب للمدرسة؟ — الساعة 8."},
+        {en:"Why do you study English? — Because I like it.",ar:"لماذا تدرس الإنجليزية؟ — لأنني أحبها."},
+        {en:"How do you go to work? — I go by car.",ar:"كيف تذهب للعمل؟ — بالسيارة."},
+        {en:"What does he want? — He wants water.",ar:"ماذا يريد؟ — يريد ماء."},
+        {en:"Which colour do you like? — I like blue.",ar:"أي لون تحب؟ — أحب الأزرق."}
+      ]},
+      {id:"l09-3",kind:"vocabulary",title_en:"Question Words",title_ar:"أدوات الاستفهام",items:[
+        {en:"what",ar:"ماذا / ما"},{en:"who",ar:"من"},{en:"where",ar:"أين"},{en:"when",ar:"متى"},{en:"why",ar:"لماذا"},{en:"how",ar:"كيف"},{en:"which",ar:"أي"},{en:"because",ar:"لأن"},{en:"today",ar:"اليوم"},{en:"tomorrow",ar:"غدًا"},{en:"here",ar:"هنا"},{en:"there",ar:"هناك"}
+      ]}
+    ]},
+    {id:"u10",order:10,level:"A2",title_ar:"ضمائر المفعول به",title_en:"Object Pronouns",lessons:[
+      {id:"l10-1",kind:"grammar",title_en:"Me, Him, Her, Us, Them",title_ar:"ضمائر المفعول به",rule_ar:"ضمائر المفعول به تأتي بعد الفعل أو بعد حرف الجر. الفرق: ضمير الفاعل يقوم بالفعل، وضمير المفعول يقع عليه الفعل.",examples:[
+        {en:"I like him.",ar:"أنا أحبه."},
+        {en:"She knows me.",ar:"هي تعرفني."},
+        {en:"We see her.",ar:"نحن نراها."},
+        {en:"He helps us.",ar:"هو يساعدنا."},
+        {en:"They call them.",ar:"هم يتصلون بهم."},
+        {en:"Give me the book!",ar:"أعطني الكتاب!"},
+        {en:"Listen to me!",ar:"استمع إلي!"},
+        {en:"This is for you.",ar:"هذا لك."}
+      ]},
+      {id:"l10-2",kind:"vocabulary",title_en:"Object Pronouns & Verbs",title_ar:"الضمائر وأفعال",items:[
+        {en:"me",ar:"إياي / ني"},{en:"him",ar:"إياه / هـ"},{en:"her",ar:"إياها / ها"},{en:"us",ar:"إيانا / نا"},{en:"them",ar:"إياهم / هم"},{en:"call",ar:"ينادي"},{en:"help",ar:"يساعد"},{en:"visit",ar:"يزور"},{en:"give",ar:"يعطي"},{en:"send",ar:"يرسل"}
+      ]}
+    ]},
+    {id:"u11",order:11,level:"A2",title_ar:"قراءة ومراجعة المضارع",title_en:"Reading & Review",lessons:[
+      {id:"l11-1",kind:"note",title_en:"My Daily Routine",title_ar:"روتيني اليومي — نص",rule_ar:"اقرأ النص واستخرج منه الأفعال في المضارع البسيط، الجمل المنفية، وظروف التكرار.",examples:[
+        {en:"My name is Sara. I am a student.",ar:"اسمي سارة. أنا طالبة."},
+        {en:"Every day, I wake up at 6 o'clock.",ar:"كل يوم، أستيقظ الساعة 6."},
+        {en:"I usually drink milk and eat bread.",ar:"عادةً أشرب الحليب وآكل الخبز."},
+        {en:"My brother doesn't drink milk.",ar:"أخي لا يشرب الحليب."},
+        {en:"She works in a big hospital.",ar:"هي تعمل في مستشفى كبير."},
+        {en:"I go to bed at 10 o'clock.",ar:"أذهب للنوم الساعة 10."}
+      ]}
+    ]}
+  ]
+};
+
+const PRONOUNS = {yo:'أنا',tú:'أنت',él_ella_usted:'هو / هي',nosotros:'نحن',vosotros:'أنتم',ellos_ellas_ustedes:'هم / هن'};
+const KIND_LABEL = {grammar:'قواعد',conjugation:'تصريف',vocabulary:'مفردات',note:'قراءة'};
+const KIND_CLASS = {grammar:'g',conjugation:'c',vocabulary:'v',note:'n'};
+const SKINS = ['midnight','sand','rose','mint','indigo','paper'];
+const SKIN_LABEL = {midnight:'منتصف الليل',sand:'رملي',rose:'وردي',mint:'نعناعي',indigo:'نيلي',paper:'ورقي'};
+
+const FLAT = [];
+CURRICULUM.units.forEach(u => u.lessons.forEach(l => FLAT.push({unit:u,lesson:l})));
+const ALL_VOCAB = [];
+CURRICULUM.units.forEach(u => u.lessons.forEach(l => {
+  if(l.items) l.items.forEach(it => ALL_VOCAB.push({...it,unit:u.order,unitAr:u.title_ar,level:u.level,lessonId:l.id}));
+}));
+
+const $ = s => document.querySelector(s);
+const $$ = s => document.querySelectorAll(s);
+
+const store = {
+  get(k,d){try{const v=localStorage.getItem(k);return v===null?d:JSON.parse(v);}catch{return d;}},
+  set(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch{}}
+};
+
+const state = {view:'dashboard',filterLevel:'all',filterKind:'all',current:null,vocabQ:'',fc:{deck:[],i:0,flipped:false}};
+
+function getStart(){let d=store.get('ew_start');if(!d){d=new Date().toISOString().slice(0,10);store.set('ew_start',d);}return d;}
+function getDay(){const a=new Date(getStart()+'T00:00:00');const b=new Date();b.setHours(0,0,0,0);return Math.max(0,Math.floor((b-a)/86400000));}
+function getProg(){return store.get('ew_prog',{});}
+function isDone(id){return !!getProg()[id];}
+function toggleDone(id){const p=getProg();if(p[id])delete p[id];else p[id]=Date.now();store.set('ew_prog',p);}
+function bumpStreak(){const t=new Date().toISOString().slice(0,10);const y=new Date(Date.now()-86400000).toISOString().slice(0,10);const s=store.get('ew_streak',{last:null,count:0});if(s.last===t)return s.count;if(s.last===y)s.count++;else s.count=1;s.last=t;store.set('ew_streak',s);return s.count;}
+function getStreak(){return store.get('ew_streak',{count:0}).count;}
+
+function say(text){if(!window.speechSynthesis)return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang='en-US';u.rate=.85;speechSynthesis.speak(u);}
+function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),1800);}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
+function setSkin(name){document.documentElement.setAttribute('data-skin',name);store.set('ew_skin',name);}
+function cycleSkin(){
+  const cur = store.get('ew_skin','midnight');
+  const pool = SKINS.filter(s => s !== cur);
+  const next = pool[Math.floor(Math.random() * pool.length)];
+  setSkin(next);toast('🎨 ' + SKIN_LABEL[next]);
+}
+
+function openSide(){$('#side').classList.add('open');$('#backdrop').classList.add('show');}
+function closeSide(){$('#side').classList.remove('open');$('#backdrop').classList.remove('show');}
+
+function updateSideProgress(){
+  const done = Object.keys(getProg()).length;
+  const pct = Math.round((done / FLAT.length) * 100);
+  const b = $('#sideBar');const p = $('#sidePct');
+  if(b)b.style.width = pct + '%';
+  if(p)p.textContent = pct + '%';
+}
+
+function renderDash(){
+  const di = Math.min(getDay(), FLAT.length-1);
+  const today = FLAT[di];
+  const done = Object.keys(getProg()).length;
+  const pct = Math.round((done / FLAT.length) * 100);
+  const st = getStreak();
+  let unitsHtml = '';
+  CURRICULUM.units.forEach(u => {
+    const uDone = u.lessons.filter(l => isDone(l.id)).length;
+    const pctU = Math.round((uDone / u.lessons.length) * 100);
+    unitsHtml += `<div class="unit" onclick="openUnit(${u.order})">
+      <div class="top">
+        <span class="order">UNIT ${String(u.order).padStart(2,'0')}</span>
+        <span class="lvl ${u.level}">${u.level}</span>
+      </div>
+      <h4>${esc(u.title_ar)}</h4>
+      <div class="en-title">${esc(u.title_en)}</div>
+      <div class="info"><span>${u.lessons.length} دروس</span><span>${uDone} مكتمل</span></div>
+      <div class="track"><i style="width:${pctU}%"></i></div>
+    </div>`;
+  });
+  return `<div class="view">
+    <div class="banner">
+      <div class="tag">🔥 ${st} ${st===1?'يوم':'أيام'} متتالية</div>
+      <h3>أهلًا بك في English88</h3>
+      <p>تعلّم الإنجليزية خطوة بخطوة — من الحروف الأساسية حتى القواعد المتقدمة، بمنهج مرتب وأسلوب تفاعلي.</p>
+      <div class="row">
+        <button class="btn solid" onclick="openLesson('${today.lesson.id}')">📘 ابدأ درس اليوم</button>
+        <button class="btn" onclick="go('lessons')">📚 تصفح كل الدروس</button>
+      </div>
+    </div>
+    <div class="stats-row">
+      <div class="stat"><div class="ring" style="--p:${pct}%"><span>${pct}%</span></div><div><div class="num">${done}/${FLAT.length}</div><div class="lbl">الدروس المكتملة</div></div></div>
+      <div class="stat"><div class="ring" style="--p:100%"><span>${FLAT.length}</span></div><div><div class="num">${FLAT.length}</div><div class="lbl">درس إجمالي</div></div></div>
+      <div class="stat"><div class="ring" style="--p:100%"><span>${ALL_VOCAB.length}</span></div><div><div class="num">${ALL_VOCAB.length}</div><div class="lbl">كلمة في القاموس</div></div></div>
+      <div class="stat"><div class="ring" style="--p:${Math.min(st*20,100)}%"><span>🔥</span></div><div><div class="num">${st}</div><div class="lbl">أيام متتالية</div></div></div>
+    </div>
+    <div class="panel">
+      <div class="panel-title">درس اليوم</div>
+      <div class="lcard" onclick="openLesson('${today.lesson.id}')">
+        <div class="meta">
+          <span class="kind ${KIND_CLASS[today.lesson.kind]}">${KIND_LABEL[today.lesson.kind]}</span>
+          <span class="kind">UNIT ${String(today.unit.order).padStart(2,'0')} · ${today.unit.level}</span>
+        </div>
+        <div class="t-en">${esc(today.lesson.title_en)}</div>
+        <div class="t-ar">${esc(today.lesson.title_ar)}</div>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-title">الوحدات</div>
+      <div class="unit-grid">${unitsHtml}</div>
+    </div>
+  </div>`;
+}
+
+function renderLessons(){
+  const filtered = FLAT.filter(({unit,lesson}) => {
+    if(state.filterLevel !== 'all' && unit.level !== state.filterLevel) return false;
+    if(state.filterKind !== 'all' && lesson.kind !== state.filterKind) return false;
+    return true;
+  });
+  let chipsLvl = `<button class="chip ${state.filterLevel==='all'?'on':''}" onclick="setFilter('level','all')">الكل</button>`;
+  ['A1','A2','B1'].forEach(l => chipsLvl += `<button class="chip ${state.filterLevel===l?'on':''}" onclick="setFilter('level','${l}')">${l}</button>`);
+  let chipsKind = `<button class="chip ${state.filterKind==='all'?'on':''}" onclick="setFilter('kind','all')">الكل</button>`;
+  Object.entries(KIND_LABEL).forEach(([k,v]) => chipsKind += `<button class="chip ${state.filterKind===k?'on':''}" onclick="setFilter('kind','${k}')">${v}</button>`);
+  return `<div class="view">
+    <div class="panel">
+      <div class="panel-title">تصفية حسب المستوى</div>
+      <div class="chips">${chipsLvl}</div>
+      <div class="panel-title" style="margin-top:1rem">تصفية حسب النوع</div>
+      <div class="chips">${chipsKind}</div>
+    </div>
+    <div class="panel">
+      <div class="panel-title">النتائج (${filtered.length} درس)</div>
+      ${filtered.length === 0 ? '<div class="empty"><div class="em">🔍</div>لا توجد نتائج مطابقة</div>' :
+        `<div class="lesson-list">${filtered.map(({unit,lesson}) => `
+          <div class="lcard ${isDone(lesson.id)?'done':''}" onclick="openLesson('${lesson.id}')">
+            <div class="meta">
+              <span class="kind ${KIND_CLASS[lesson.kind]}">${KIND_LABEL[lesson.kind]}</span>
+              <span class="kind">UNIT ${String(unit.order).padStart(2,'0')}</span>
+              <span class="kind ${unit.level}">${unit.level}</span>
+            </div>
+            <div class="t-en">${esc(lesson.title_en)}</div>
+            <div class="t-ar">${esc(lesson.title_ar)}</div>
+          </div>`).join('')}</div>`}
+    </div>
+  </div>`;
+}
+
+function renderLesson(){
+  const item = FLAT.find(f => f.lesson.id === state.current);
+  if(!item) return '<div class="empty"><div class="em">😕</div>الدرس غير موجود</div>';
+  const {unit,lesson} = item;
+  const idx = FLAT.findIndex(f => f.lesson.id === lesson.id);
+  const prev = idx > 0 ? FLAT[idx-1] : null;
+  const next = idx < FLAT.length-1 ? FLAT[idx+1] : null;
+  let body = '';
+  if(lesson.rule_ar) body += `<div class="callout">${esc(lesson.rule_ar)}</div>`;
+  if(lesson.conjugation){
+    for(const [verb, forms] of Object.entries(lesson.conjugation)){
+      body += `<div class="verb-block"><h5>${esc(verb)}</h5><table class="conj"><thead><tr><th>الضمير</th><th>الصيغة</th></tr></thead><tbody>`;
+      for(const [p,f] of Object.entries(forms)){
+        body += `<tr><td>${PRONOUNS[p]||p}</td><td class="en" onclick="say('${esc(f.replace(/'/g,"\\'"))}')">${esc(f)} 🔊</td></tr>`;
+      }
+      body += `</tbody></table></div>`;
+    }
+  }
+  if(lesson.examples){
+    body += `<div class="panel-title" style="margin-top:1.2rem">أمثلة تطبيقية</div><div class="ex-list">`;
+    lesson.examples.forEach(e => {
+      body += `<div class="ex" onclick="say('${esc(e.en.replace(/'/g,"\\'"))}')"><span class="en">${esc(e.en)}<span class="spk">🔊</span></span><span class="ar">${esc(e.ar)}</span></div>`;
+    });
+    body += `</div>`;
+  }
+  if(lesson.items){
+    body += `<div class="panel-title" style="margin-top:1.2rem">المفردات (${lesson.items.length})</div><div class="voc-grid">`;
+    lesson.items.forEach(it => {
+      body += `<div class="voc" onclick="say('${esc(it.en.replace(/'/g,"\\'"))}')"><span class="en">${esc(it.en)}</span><span class="ar">${esc(it.ar)}</span></div>`;
+    });
+    body += `</div>`;
+  }
+  const done = isDone(lesson.id);
+  return `<div class="view">
+    <button class="btn sm" onclick="go('lessons')">→ عودة للدروس</button>
+    <div class="panel" style="margin-top:1rem">
+      <div class="lesson-hd">
+        <div class="meta">
+          <span class="kind ${KIND_CLASS[lesson.kind]}">${KIND_LABEL[lesson.kind]}</span>
+          <span class="kind">UNIT ${String(unit.order).padStart(2,'0')} · ${esc(unit.title_ar)}</span>
+          <span class="kind ${unit.level}">${unit.level}</span>
+        </div>
+        <h2>${esc(lesson.title_en)}</h2>
+        <div class="ar">${esc(lesson.title_ar)}</div>
+      </div>
+      ${body}
+      <div class="actions">
+        <button class="btn ${done?'done':'solid'}" onclick="toggleLessonDone('${lesson.id}')">${done?'✓ مكتمل':'○ حدد كمكتمل'}</button>
+      </div>
+      <div class="nav-pp">
+        ${prev?`<button class="btn" onclick="openLesson('${prev.lesson.id}')">→ السابق</button>`:'<span></span>'}
+        ${next?`<button class="btn" onclick="openLesson('${next.lesson.id}')">التالي ←</button>`:'<span></span>'}
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderVocab(){
+  const q = state.vocabQ.trim().toLowerCase();
+  const list = q ? ALL_VOCAB.filter(v => v.en.toLowerCase().includes(q) || v.ar.includes(q)) : ALL_VOCAB;
+  const limited = list.slice(0, 300);
+  return `<div class="view">
+    <div class="panel">
+      <div class="panel-title">قاموس المفردات (${ALL_VOCAB.length} كلمة)</div>
+      <input class="search-wrap" id="vocabInput" type="text" placeholder="ابحث بالعربية أو الإنجليزية..." value="${esc(state.vocabQ)}">
+      <div style="color:var(--dim);font-size:.8rem;margin-bottom:.7rem">${list.length} نتيجة${list.length>300?' — يُعرض أول 300':''}</div>
+      <div class="voc-grid">
+        ${limited.map(v => `<div class="voc" onclick="say('${esc(v.en.replace(/'/g,"\\'"))}')"><span class="en">${esc(v.en)}</span><span class="ar">${esc(v.ar)}</span></div>`).join('')}
+      </div>
+      ${list.length === 0 ? '<div class="empty"><div class="em">🔍</div>لا نتائج</div>' : ''}
+    </div>
+  </div>`;
+}
+
+function renderFlash(){
+  const fc = state.fc;
+  if(!fc.deck.length){
+    return `<div class="view">
+      <div class="panel">
+        <div class="panel-title">اختر مجموعة للمراجعة</div>
+        <div class="fc-setup">
+          <div class="fc-pick" onclick="startFC('all')"><h4>كل المفردات</h4><p>${ALL_VOCAB.length} كلمة</p></div>
+          ${CURRICULUM.units.map(u => {
+            const c = u.lessons.reduce((s,l) => s + (l.items ? l.items.length : 0), 0);
+            return c > 0 ? `<div class="fc-pick" onclick="startFC(${u.order})"><h4>وحدة ${u.order}</h4><p>${c} كلمة · ${u.level}</p></div>` : '';
+          }).join('')}
+        </div>
+      </div>
+    </div>`;
+  }
+  const card = fc.deck[fc.i];
+  return `<div class="view">
+    <div class="panel">
+      <div class="panel-title">بطاقة ${fc.i+1} من ${fc.deck.length}
+        <button class="btn sm" style="margin-inline-start:auto" onclick="exitFC()">خروج</button>
+      </div>
+      <div class="flash ${fc.flipped?'flip':''}" onclick="flipFC()">
+        ${fc.flipped
+          ? `<div class="word">${esc(card.ar)}</div><div class="hint">اضغط للرجوع للإنجليزية</div>`
+          : `<div class="word">${esc(card.en)}</div><div class="hint">اضغط لكشف المعنى</div>`}
+      </div>
+      <div class="fc-ctrl">
+        <button class="btn" onclick="prevFC()">→ السابق</button>
+        <button class="btn" onclick="say('${esc(card.en.replace(/'/g,"\\'"))}')">🔊 نطق</button>
+        <button class="btn solid" onclick="nextFC()">التالي ←</button>
+      </div>
+      <div class="fc-idx">${fc.i+1} / ${fc.deck.length}</div>
+    </div>
+  </div>`;
+}
+
+function render(){
+  const root = $('#viewRoot');
+  let html = '';
+  const titles = {dashboard:['الرئيسية','ابدأ رحلتك في اللغة الإنجليزية'],lessons:['الدروس','كل دروس المنهج'],lesson:['الدرس',''],vocab:['المفردات','قاموس شامل'],flashcards:['بطاقات المراجعة','راجع المفردات بالتكرار']};
+  if(state.view === 'dashboard') html = renderDash();
+  else if(state.view === 'lessons') html = renderLessons();
+  else if(state.view === 'lesson') html = renderLesson();
+  else if(state.view === 'vocab') html = renderVocab();
+  else if(state.view === 'flashcards') html = renderFlash();
+  root.innerHTML = html;
+  const t = titles[state.view] || ['',''];
+  $('#pageTitle').textContent = t[0];
+  $('#pageSub').textContent = t[1];
+  $$('.side-nav button').forEach(b => b.classList.toggle('on', b.dataset.view === state.view));
+  $$('.mobile-nav button').forEach(b => b.classList.toggle('on', b.dataset.view === state.view));
+  updateSideProgress();
+  window.scrollTo(0,0);
+}
+
+function go(v){state.view = v;render();closeSide();}
+function openLesson(id){state.current = id;state.view = 'lesson';render();closeSide();}
+function setFilter(k,v){state[k === 'level' ? 'filterLevel' : 'filterKind'] = v;render();}
+function openUnit(order){state.filterLevel = 'all';state.filterKind = 'all';state.view = 'lessons';render();closeSide();}
+function toggleLessonDone(id){toggleDone(id);render();toast(isDone(id)?'تم تحديده كمكتمل ✓':'تم إلغاء التحديد');}
+
+function startFC(scope){
+  let deck;
+  if(scope === 'all') deck = ALL_VOCAB.slice();
+  else deck = ALL_VOCAB.filter(v => v.unit === scope);
+  for(let i = deck.length-1; i > 0; i--){const j = Math.floor(Math.random()*(i+1));[deck[i],deck[j]] = [deck[j],deck[i]];}
+  state.fc = {deck,i:0,flipped:false};
+  render();
+}
+function flipFC(){state.fc.flipped = !state.fc.flipped;render();}
+function nextFC(){if(state.fc.i < state.fc.deck.length-1){state.fc.i++;state.fc.flipped = false;render();}else{toast('وصلت لنهاية المجموعة 🎉');}}
+function prevFC(){if(state.fc.i > 0){state.fc.i--;state.fc.flipped = false;render();}}
+function exitFC(){state.fc = {deck:[],i:0,flipped:false};render();}
+
+function openSearch(){
+  $('#overlay').classList.add('open');
+  setTimeout(() => $('#searchInput').focus(), 50);
+  $('#searchInput').value = '';
+  renderSearch('');
+}
+function closeSearch(){$('#overlay').classList.remove('open');}
+function renderSearch(q){
+  q = q.trim().toLowerCase();
+  const box = $('#searchRes');
+  if(!q){box.innerHTML = '<div class="sr-empty">اكتب للبحث عن درس أو كلمة</div>';return;}
+  const lessons = FLAT.filter(({lesson,unit}) => lesson.title_en.toLowerCase().includes(q) || lesson.title_ar.includes(q) || unit.title_ar.includes(q)).slice(0,8);
+  const vocab = ALL_VOCAB.filter(v => v.en.toLowerCase().includes(q) || v.ar.includes(q)).slice(0,12);
+  if(!lessons.length && !vocab.length){box.innerHTML = '<div class="sr-empty">لا نتائج</div>';return;}
+  let html = '';
+  if(lessons.length){
+    html += '<div style="padding:.4rem .9rem;color:var(--dim);font-size:.72rem;font-weight:700">الدروس</div>';
+    lessons.forEach(({lesson,unit}) => {
+      html += `<div class="sr" onclick="closeSearch();openLesson('${lesson.id}')">
+        <div><div class="ar" style="color:var(--fg);font-weight:600">${esc(lesson.title_ar)}</div><div style="font-size:.7rem;color:var(--dim);margin-top:.1rem">UNIT ${unit.order} · ${unit.level}</div></div>
+        <div class="en">${esc(lesson.title_en)}</div>
+      </div>`;
+    });
+  }
+  if(vocab.length){
+    html += '<div style="padding:.4rem .9rem;color:var(--dim);font-size:.72rem;font-weight:700;margin-top:.4rem">المفردات</div>';
+    vocab.forEach(v => {
+      html += `<div class="sr" onclick="event.stopPropagation();say('${esc(v.en.replace(/'/g,"\\'"))}')"><span class="ar">${esc(v.ar)}</span><span class="en">${esc(v.en)} 🔊</span></div>`;
+    });
+  }
+  box.innerHTML = html;
+}
+
+function init(){
+  $('#year').textContent = new Date().getFullYear();
+  setSkin(store.get('ew_skin','midnight'));
+  bumpStreak();
+
+  const splash = $('#splash');
+  const hide = () => {splash.classList.add('gone');setTimeout(() => splash.remove(),700);};
+  if(document.readyState === 'complete') setTimeout(hide, 2400);
+  else window.addEventListener('load', () => setTimeout(hide, 2400));
+
+  $$('.side-nav button').forEach(b => b.onclick = () => {go(b.dataset.view);});
+  $$('.mobile-nav button').forEach(b => b.onclick = () => go(b.dataset.view));
+  $('#skinBtn').onclick = cycleSkin;
+  $('#searchOpen').onclick = openSearch;
+  $('#overlay').onclick = (e) => {if(e.target.id === 'overlay') closeSearch();};
+  $('#searchInput').oninput = (e) => renderSearch(e.target.value);
+  $('#menuBtn').onclick = openSide;
+  $('#sideClose').onclick = closeSide;
+  $('#backdrop').onclick = closeSide;
+  document.addEventListener('keydown', (e) => {if(e.key === 'Escape'){closeSearch();closeSide();}});
+
+  $('#resetBtn').onclick = () => {
+    if(confirm('سيتم إعادة تعيين تاريخ البداية والتقدم. متابعة؟')){
+      localStorage.removeItem('ew_start');
+      localStorage.removeItem('ew_prog');
+      localStorage.removeItem('ew_streak');
+      toast('تمت إعادة التعيين');
+      setTimeout(() => location.reload(), 600);
+    }
+  };
+
+  document.addEventListener('input', (e) => {
+    if(e.target.id === 'vocabInput'){
+      state.vocabQ = e.target.value;
+      const input = e.target;
+      const pos = input.selectionStart;
+      render();
+      const ni = $('#vocabInput');
+      if(ni){ni.focus();ni.setSelectionRange(pos,pos);}
+    }
+  });
+
+  render();
+}
+
+init();
+</script>
+</body>
+</html>
