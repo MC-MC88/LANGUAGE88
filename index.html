@@ -1,0 +1,165 @@
+ac<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Language88 — اختر لغتك</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#070a17;--panel:#0e1424;--stroke:#1f2a44;
+  --fg:#f0f4ff;--dim:#8b98b8;
+  --en:#3b82f6;--en2:#1d4ed8;
+  --es:#f59e0b;--es2:#dc2626;
+  --shadow:0 20px 60px rgba(0,0,0,.4);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{min-height:100%}
+body{
+  font-family:'IBM Plex Sans Arabic','Manrope',system-ui,sans-serif;
+  background:var(--bg);color:var(--fg);min-height:100vh;
+  display:flex;flex-direction:column;overflow-x:hidden;position:relative;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(circle at 15% 15%, rgba(59,130,246,.15), transparent 45%),
+    radial-gradient(circle at 85% 85%, rgba(245,158,11,.13), transparent 45%);
+}
+body::after{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.015) 1px, transparent 1px);
+  background-size:60px 60px;
+}
+.shell{
+  position:relative;z-index:1;flex:1;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:3rem 1.5rem;gap:2.5rem;
+}
+.brand{text-align:center;animation:fadeUp .8s ease}
+.brand .logo{
+  display:inline-block;font-family:'Manrope',sans-serif;
+  font-size:2.6rem;font-weight:800;letter-spacing:-1.5px;
+  background:linear-gradient(120deg,#60a5fa 0%,#a78bfa 50%,#fb923c 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  margin-bottom:.5rem;
+}
+.brand .tag{
+  display:inline-block;padding:.35rem .9rem;
+  border:1px solid var(--stroke);border-radius:99px;
+  font-size:.75rem;color:var(--dim);letter-spacing:2px;font-weight:600;margin-top:.5rem;
+}
+.hero{text-align:center;max-width:640px;animation:fadeUp .8s ease .1s backwards}
+.hero h1{
+  font-family:'Manrope',sans-serif;font-size:2.2rem;font-weight:800;
+  letter-spacing:-1px;line-height:1.3;margin-bottom:.8rem;
+}
+.hero p{color:var(--dim);font-size:1rem;line-height:1.7}
+.cards{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;
+  width:100%;max-width:900px;animation:fadeUp .8s ease .2s backwards;
+}
+.lang{
+  background:var(--panel);border:1px solid var(--stroke);border-radius:20px;
+  padding:2.2rem 1.8rem;text-decoration:none;color:var(--fg);
+  text-align:center;position:relative;overflow:hidden;
+  transition:all .35s cubic-bezier(.4,0,.2,1);cursor:pointer;
+}
+.lang::before{
+  content:"";position:absolute;top:-50%;inset-inline-end:-30%;
+  width:280px;height:280px;border-radius:50%;opacity:.18;
+  transition:opacity .35s;pointer-events:none;
+}
+.lang.en::before{background:radial-gradient(circle,var(--en),transparent 70%)}
+.lang.es::before{background:radial-gradient(circle,var(--es),transparent 70%)}
+.lang:hover{transform:translateY(-6px);border-color:transparent;box-shadow:var(--shadow)}
+.lang.en:hover{border-color:var(--en)}
+.lang.es:hover{border-color:var(--es)}
+.lang:hover::before{opacity:.28}
+.lang .flag{
+  font-size:3.4rem;line-height:1;margin-bottom:1rem;
+  display:inline-block;transition:transform .35s;
+}
+.lang:hover .flag{transform:scale(1.15) rotate(-5deg)}
+.lang h2{
+  font-family:'Manrope',sans-serif;font-size:1.7rem;font-weight:800;
+  letter-spacing:-.5px;margin-bottom:.4rem;
+}
+.lang.en h2{color:#93c5fd}
+.lang.es h2{color:#fcd34d}
+.lang .desc{
+  color:var(--dim);font-size:.9rem;line-height:1.6;
+  margin-bottom:1.4rem;min-height:2.8em;
+}
+.lang .cta{
+  display:inline-flex;align-items:center;gap:.4rem;
+  padding:.7rem 1.5rem;border-radius:11px;font-size:.88rem;font-weight:700;
+  transition:all .25s;border:1px solid transparent;
+}
+.lang.en .cta{background:linear-gradient(135deg,var(--en),var(--en2));color:#fff}
+.lang.es .cta{background:linear-gradient(135deg,var(--es),var(--es2));color:#fff}
+.lang:hover .cta{transform:translateX(-3px);box-shadow:0 8px 24px rgba(0,0,0,.3)}
+.lang .meta{
+  display:flex;justify-content:center;gap:1rem;
+  margin-top:1.2rem;padding-top:1.2rem;border-top:1px dashed var(--stroke);
+  font-size:.75rem;color:var(--dim);
+}
+.lang .meta span{display:flex;align-items:center;gap:.3rem}
+footer{
+  position:relative;z-index:1;padding:1.5rem;text-align:center;
+  font-size:.78rem;color:var(--dim);border-top:1px solid var(--stroke);
+}
+footer a{color:#60a5fa;text-decoration:none}
+footer a:hover{text-decoration:underline}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:720px){
+  .shell{padding:2.5rem 1.2rem;gap:2rem}
+  .brand .logo{font-size:2rem}
+  .hero h1{font-size:1.6rem}
+  .hero p{font-size:.92rem}
+  .cards{grid-template-columns:1fr;gap:1.2rem}
+  .lang{padding:1.8rem 1.4rem}
+  .lang .flag{font-size:2.8rem}
+  .lang h2{font-size:1.4rem}
+}
+</style>
+</head>
+<body>
+<main class="shell">
+  <div class="brand">
+    <div class="logo">Language88</div>
+    <div class="tag">LEARN · PRACTICE · MASTER</div>
+  </div>
+  <div class="hero">
+    <h1>اختر اللغة التي تريد تعلمها</h1>
+    <p>منهجان كاملان، من الصفر حتى الاحتراف، بأسلوب تفاعلي ومنظم.</p>
+  </div>
+  <div class="cards">
+    <a href="English88.html" class="lang en">
+      <div class="flag">🇬🇧</div>
+      <h2>English88</h2>
+      <div class="desc">تعلّم الإنجليزية من الحروف الأساسية حتى القواعد المتقدمة.</div>
+      <span class="cta">ابدأ الآن ←</span>
+      <div class="meta"><span>📚 66 درسًا</span><span>🎯 A1 → B1</span></div>
+    </a>
+    <a href="Spanish88.html" class="lang es">
+      <div class="flag">🇪🇸</div>
+      <h2>Spanish88</h2>
+      <div class="desc">تعلّم الإسبانية خطوة بخطوة مع تمارين ومفردات يومية.</div>
+      <span class="cta">ابدأ الآن ←</span>
+      <div class="meta"><span>📚 8 وحدات</span><span>🎯 A1 → B1</span></div>
+    </a>
+  </div>
+</main>
+<footer>
+  © <span id="y"></span> Language88 — <a href="mailto:mohamed005cheikh@gmail.com">mohamed005cheikh@gmail.com</a> | by MC88
+  <br>
+  <a href="https://wa.me/22230726475" target="_blank" rel="noopener" style="display:inline-block;margin-top:.4rem">📱 +222 30 72 64 75</a>
+</footer>
+<script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+</body>
+</html>
